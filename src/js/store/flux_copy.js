@@ -25,6 +25,7 @@ const getState = ({ getStore, setStore }) => {
 						username: username,
 						email: email
 					})
+
 				}).then(getDataUpdated => {
 					fetch("https://3000-ad9de871-db62-4719-a2f9-96de00c96e3f.ws-us0.gitpod.io/person")
 						.then(response => response.json())
@@ -33,7 +34,29 @@ const getState = ({ getStore, setStore }) => {
 							setStore({ store });
 						});
 				});
-			}
+			},
+
+                deleteperson: (id) => {
+                    const store = getStore();
+				fetch("https://3000-ad9de871-db62-4719-a2f9-96de00c96e3f.ws-us0.gitpod.io/person", {
+					method: "POST",
+					headers: { "Content-type": "application/json" },
+					body: JSON.stringify({
+						username: username,
+						email: email
+					}),
+                }). then(getDataUpdated => {
+					fetch("https://3000-ad9de871-db62-4719-a2f9-96de00c96e3f.ws-us0.gitpod.io/person")
+						.then(response => response.json())
+						.then(data => {
+							store.person = data;
+							setStore({ store });
+						});
+                }
+
+
+
+
 		}
 	};
 };
